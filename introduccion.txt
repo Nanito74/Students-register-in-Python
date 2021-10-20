@@ -1,0 +1,18 @@
+TP a realizar por: Cristian Dalpino - Mariano Cordoba
+
+Para la elaboracion nos basaremos en estas pautas a desarollar en el sistema
+
+La idea del TP es elaborar una planilla con alumnos para una materia, los cuales tengan nombre y DNI. Aparte, una columna de tp entregados, dos parciales, y asistencia.
+Ademas contara con una condicion: Aprobado , regular y no-aprobado. 
+
+-Todos los alumnos deberan tener un 75% de asistencia para estar en condicion de aprobado o regular, de lo contrario estara como desaprobado.
+
+-Para la condicion de aprobado debera: aparte de la asistencia, 100% de tp entregados y los DOS parciales aprobados con 8 o nota superior.
+
+-Para la condicion de regular debera: aparte de la asistencia, 100% de tp entregados y al menos un parcial aprobado. 
+
+-Si no cumple con las anteriores condiciones, el alumno quedara en condicion de no aprobado y debera recursar la materia.
+
+-La nota final sera un promedio de los dos parciales (solo para alumnos en condicion de aprobados) 
+
+Ademas el programa debera: agregar o quitar alumnos, modificar sus notas o datos, mostrar la cantidad de alumnos aprobados, regulares o no-aprobados (y calcular un promedio de estas condiciones), buscar alumnos por nombre o DNI.
