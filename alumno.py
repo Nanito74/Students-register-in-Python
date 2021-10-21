@@ -18,7 +18,7 @@ class Alumno:
     def cambiar_condicion(self):
         if self.asistencia is None or self.tp is None or self.p1 is None or self.p2 is None:
             self.condicion = 'Incompleto' 
-        elif int(self.asistencia) >= 75 and int(self.tp) >= 100 and int(self.p1) >= 8 and int(self.p2) >= 8:
+        elif int(self.asistencia) >= 75 and int(self.tp) >= 100 and int(self.p1) >= 6 and int(self.p2) >= 6:
             self.condicion = 'Aprobado'
         elif (int(self.asistencia) >= 75 and int(self.tp) >= 100) and (int(self.p1) >= 6 or int(self.p2) >= 6):
             self.condicion = 'Regular'

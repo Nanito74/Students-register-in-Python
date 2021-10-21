@@ -1,5 +1,5 @@
 #Esta clase sera la encargada de coordinar la BD con el registro de memoria y tambien de interactuar con la interfaz para realizar todas las funciones
- 
+from alumnoLibre import AlumnoLibre
 from alumno import Alumno
 from repositorioAlumno import RepositorioAlumno
 class Registro:
@@ -40,7 +40,7 @@ class Registro:
         return alumnos
 
 #Metodo para modificar los datos de un alumno
-    def modificar_alumno(self,dni, nuevodni, nombre, asistencia, tp, p1, p2, condicion, notafinal):
+    def modificar_alumno(self,dni, nuevodni, nombre, asistencia, tp, p1, p2, condicion, notafinal, libre):
         alumno = self._buscar_por_dni(dni)
         if alumno:
             alumno.nuevodni = nuevodni
@@ -51,6 +51,7 @@ class Registro:
             alumno.p2 = p2
             alumno.condicion = condicion
             alumno.notafinal = notafinal
+            alumno.libre = libre
             self.repo.update(alumno)
             return True
         return False
@@ -62,4 +63,10 @@ class Registro:
             if alumno.condicion == condicion:
                 alumnos.append(alumno)
         return alumnos
+
+#Metodo para agregar un nuevo alumno libre
+    def nuevo_alumno_libre(self,dni,nombre,asistencia,tp,p1,p2,libre):
+        a = AlumnoLibre(dni,nombre,asistencia,tp,p1,p2,libre)
+        self.repo.store(a)
+        self.alumnos.append(a)
 
