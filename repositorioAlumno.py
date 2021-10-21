@@ -14,7 +14,7 @@ class RepositorioAlumno(Repositorio):
 
         alumnos = []
         for r in result:
-            if r[8] == 'si'
+            if r[8] == 'si':
                 a = AlumnoLibre(r[0], r[1], r[2], r[3], r[4], r[5], r[6], r[7],r[8])
                 a.cambiar_condicion_libre()
                 alumnos.append(a)
