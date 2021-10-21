@@ -29,10 +29,4 @@ class Alumno:
             self.notafinal = (self.p1 + self.p2) / 2
         else:
             self.notafinal = None
-
-#Recibe un filtro de busqueda, y determina si coincide con el dni o con el nombre. Disntigue mayusculas y minusculas   
-    def buscar_alumno(self, filtro):
-        if filtro in self.nombre or filtro in str(self.dni):
-            return True
-        else:
-            return False
+        
