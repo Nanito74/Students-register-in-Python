@@ -24,7 +24,7 @@ class RepositorioAlumno(Repositorio):
         alumno.cambiar_condicion()
         try: 
             query = "INSERT INTO alumnos (dni, nombre, asistencia, tp, p1, p2, condicion, notafinal) VALUES (?, ?, ?, ?, ?, ?, ?, ?)"
-            self.cursor.execute(query, [alumno.dni, alumno.nombre, alumno.asistencia, alumno.tp, alumno.p1, alumno.p2, alumno            alumno.condicion, alumno.notafinal])
+            self.cursor.execute(query, [alumno.dni, alumno.nombre, alumno.asistencia, alumno.tp, alumno.p1, alumno.p2, alumno.condicion, alumno.notafinal])
             self.bd.commit()
             return True
         except:
