@@ -1,7 +1,7 @@
 # La clase alumno permitira instaciar alumnos que contengan DNI, nombre, asistencia, tp, p1, p2, condicion y nota final.
 
 class Alumno:
-    def __init__(self, dni, nombre, asistencia=None, tp=None, p1=None, p2=None, condicion='', notafinal=None):
+    def __init__(self, dni, nombre, asistencia=None, tp=None, p1=None, p2=None, condicion='', notafinal=None, libre=None):
         self.dni = dni
         self.nombre = nombre
         self.asistencia = asistencia
@@ -10,6 +10,7 @@ class Alumno:
         self.p2 = p2
         self.condicion = condicion
         self.notafinal = notafinal
+        self.libre = libre
 
 #Este metodo lo crearemos para que el alumno cambie la condición automáticamente al saber sus notas y asistencia.
 #Si falta alguna nota dejaremos su condicion como incompleto
