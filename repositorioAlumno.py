@@ -18,3 +18,31 @@ class RepositorioAlumno(Repositorio):
             alumnos.append(a)
         
         return alumnos
+
+#Este metodo recibe un alumno y lo almacena en la base de datos. Primero actualiza su condicion. Y se guardan los cambios si todo salio exitosamente. De lo contrario retorna False
+    def store(self, alumno):
+        alumno.cambiar_condicion()
+        try: 
+            query = "INSERT INTO alumnos (dni, nombre, asistencia, tp, p1, p2, condicion, notafinal) VALUES (?, ?, ?, ?, ?, ?, ?, ?)"
+            self.cursor.execute(query, [alumno.dni, alumno.nombre, alumno.asistencia, alumno.tp, alumno.p1, alumno.p2, alumno            alumno.condicion, alumno.notafinal])
+            self.bd.commit()
+            return True
+        except:
+            self.bd.rollback()
+            return False
+#Este metodo recibe un alumno y lo elimina en la base de datos.Y se guardan los cambios si todo salio exitosamente. De lo contrario retorna False. Tambien returna False si ese alumno no existe.
+    def delete(self,alumno):
+        try:
+            query = "DELETE FROM alumnos WHERE dni = ?"
+            self.cursor.execute(query, [alumno.dni])
+ 
+            c = self.cursor.rowcount
+            if c == 0:
+                self.bd.rollback()
+                return False
+            else:
+                self.bd.commit()
+                return True
+        except:
+            self.bd.rollback()
+            return False
