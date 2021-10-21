@@ -53,7 +53,7 @@ class RepositorioAlumno(Repositorio):
         alumno.cambiar_condicion()
         try:
             query = "UPDATE alumnos SET dni = ?, nombre = ?, asistencia = ?, tp = ?, p1 = ?, p2 = ?, condicion = ?, notafinal = ? WHERE dni = ?"
-            result = self.cursor.execute(query, [alumno.dni, alumno.nombre, alumno.asistencia, alumno.tp, alumno.p1, alumno.p2, alumno.condicion, alumno.notafinal, alumno.dni])
+            result = self.cursor.execute(query, [alumno.nuevodni, alumno.nombre, alumno.asistencia, alumno.tp, alumno.p1, alumno.p2, alumno.condicion, alumno.notafinal, alumno.dni])
 
             if result.rowcount == 0:
                 self.bd.rollback()
