@@ -55,3 +55,11 @@ class Registro:
             return True
         return False
 
+#Metodo para mostrar la condicion de los alumnos
+    def mostrar_condicion(self,condicion):
+        alumnos = []
+        for alumno in self.alumnos:
+            if alumno.condicion == condicion:
+                alumnos.append(alumno)
+        return alumnos
+
