@@ -14,3 +14,21 @@ class Registro:
         a = Alumno(dni,nombre,asistencia,tp,p1,p2)
         self.repo.store(a)
         self.alumnos.append(a)
+
+#Recibe un dni para buscar alumnos. Este metodo se utilizara dentro de esta clase
+
+    def _buscar_por_dni(self, dni):
+        for alumno in self.alumnos:
+            if alumno.dni == dni:
+                return alumno
+        return None
+    
+#Este metodo recibe un dni, identifica si hay un alumno con ese DNI y lo elimina.
+
+    def eliminar_alumno(self, dni):
+        alumno = self._buscar_por_dni(dni)
+        if alumno:
+            self.repo.delete(alumno)
+            self.alumnos.remove(alumno)
+            return True
+        return False
