@@ -1,7 +1,7 @@
 # La clase alumno permitira instaciar alumnos que contengan DNI, nombre, asistencia, tp, p1, p2, condicion y nota final.
 
 class Alumno:
-    def __init__(self, dni, nombre, asistencia, tp=None, p1=None, p2=None, condicion='', notafinal=None):
+    def __init__(self, dni, nombre, asistencia=None, tp=None, p1=None, p2=None, condicion='', notafinal=None):
         self.dni = dni
         self.nombre = nombre
         self.asistencia = asistencia
@@ -17,9 +17,15 @@ class Alumno:
     def cambiar_condicion(self):
         if self.asistencia is None or self.tp is None or self.p1 is None or self.p2 is None:
             self.condicion = 'Incompleto' 
-        elif int(self.asistencia) >= 75 and int(self.tp) < 100 and int(self.p1) >= 8 and int(self.p2) >= 8:
+        elif int(self.asistencia) >= 75 and int(self.tp) >= 100 and int(self.p1) >= 8 and int(self.p2) >= 8:
             self.condicion = 'Aprobado'
-        elif int(self.asistencia) >= 75 and int(self.tp) < 100 and int(self.p1) >= 6 or int(self.p2) >= 6:
+        elif int(self.asistencia) >= 75 and int(self.tp) >= 100 and int(self.p1) >= 6 or int(self.p2) >= 6:
             self.condicion = 'Regular'
         else:
             self.condicion = 'Desaprobado'
+
+        if self.condicion == 'Aprobado':
+            self.notafinal = (self.p1 + self.p2) / 2
+        else:
+            self.notafinal = None
+        
