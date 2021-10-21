@@ -46,3 +46,21 @@ class RepositorioAlumno(Repositorio):
         except:
             self.bd.rollback()
             return False
+
+#Este meotodo recibe un alumno, actualiza su condicion y actualiza sus datos en la BD. Retorna True si la actualizacion no tuvo fallos. De lo contrario retorna False. Si el alumno no existe retorna False.
+    
+    def update(self, alumno):
+        alumno.cambiar_condicion()
+        try:
+            query = "UPDATE alumnos SET dni = ?, nombre = ?, asistencia = ?, tp = ?, p1 = ?, p2 = ?, condicion = ?, notafinal = ? WHERE dni = ?"
+            result = self.cursor.execute(query, [alumno.dni, alumno.nombre, alumno.asistencia, alumno.tp, alumno.p1, alumno.p2, alumno.condicion, alumno.notafinal, alumno.dni])
+
+            if result.rowcount == 0:
+                self.bd.rollback()
+                return False
+            else:
+                self.bd.commit()
+                return True
+        except:
+            self.bd.rollback()
+            return False
