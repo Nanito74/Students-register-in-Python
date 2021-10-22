@@ -9,7 +9,7 @@ class RepositorioAlumno(Repositorio):
 
 # Este metodo realiza una lista de python con todos los elementos alumnos que haya en la BD"
     def get_all(self):
-        query = "SELECT dni, nombre, asistencia, tp, p1, p2, condicion, notafinal FROM alumnos"
+        query = "SELECT dni, nombre, asistencia, tp, p1, p2, condicion, notafinal, libre FROM alumnos"
         result = self.cursor.execute(query).fetchall()
 
         alumnos = []
@@ -32,8 +32,8 @@ class RepositorioAlumno(Repositorio):
         else:
             alumno.cambiar_condicion()
         try: 
-            query = "INSERT INTO alumnos (dni, nombre, asistencia, tp, p1, p2, condicion, notafinal) VALUES (?, ?, ?, ?, ?, ?, ?, ?)"
-            self.cursor.execute(query, [alumno.dni, alumno.nombre, alumno.asistencia, alumno.tp, alumno.p1, alumno.p2, alumno.condicion, alumno.notafinal])
+            query = "INSERT INTO alumnos (dni, nombre, asistencia, tp, p1, p2, condicion, notafinal, libre) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)"
+            self.cursor.execute(query, [alumno.dni, alumno.nombre, alumno.asistencia, alumno.tp, alumno.p1, alumno.p2, alumno.condicion, alumno.notafinal, alumno.libre])
             self.bd.commit()
             return True
         except:
@@ -64,8 +64,8 @@ class RepositorioAlumno(Repositorio):
         else:
             alumno.cambiar_condicion()
         try:
-            query = "UPDATE alumnos SET dni = ?, nombre = ?, asistencia = ?, tp = ?, p1 = ?, p2 = ?, condicion = ?, notafinal = ?, libre = ? WHERE dni = ?"
-            result = self.cursor.execute(query, [alumno.nuevodni, alumno.nombre, alumno.asistencia, alumno.tp, alumno.p1, alumno.p2, alumno.condicion, alumno.notafinal, alumno.libre, alumno.dni])
+            query = "UPDATE alumnos SET dni = ?, nombre = ?, asistencia = ?, tp = ?, p1 = ?, p2 = ?, condicion = ?, notafinal = ? WHERE dni = ?"
+            result = self.cursor.execute(query, [alumno.nuevodni, alumno.nombre, alumno.asistencia, alumno.tp, alumno.p1, alumno.p2, alumno.condicion, alumno.notafinal, alumno.dni])
             if result.rowcount == 0:
                 self.bd.rollback()
                 return False
