@@ -141,6 +141,36 @@ class Menu:
         self.filtro.grid(row=4,column=1)
         botonbuscaralumno = ttk.Button(self.marco6,text='Buscar',command=lambda:[self.buscar_alumno(), self.limpiarmarcos(self.marco1)]).grid(row=6, column=1)
 
+#Estos metodos se utilizaran para limpiar la interfaz de usuario y actualizarla cuando sea necesario.
+    def limpiarmarcos(self, marco):
+        self.marco1.grid_remove()
+        self.marco2.grid_remove()
+        self.marco3.grid_remove()
+        self.marco4.grid_remove()
+        self.marco5.grid_remove()
+        self.marco6.grid_remove()
+ 
+        self.marco = marco
+        self.marco.grid()
+    
+    def limpiarcampos(self):
+        self.nombre.delete(0,END)
+        self.dni.delete(0,END)
+        self.tp.delete(0,END)
+        self.p1.delete(0,END)
+        self.p2.delete(0,END)
+        self.libre.delete(0,END)
+        self.dnidelete.delete(0,END)
+        self.condicion.delete(0,END)
+        self.dniviejo.delete(0,END)
+        self.nuevodni.delete(0,END)
+        self.nuevonombre.delete(0,END)
+        self.nuevaasistencia.delete(0,END)
+        self.nuevotp.delete(0,END)
+        self.nuevop1.delete(0,END)
+        self.nuevop2.delete(0,END)
+        self.filtro.delete(0,END)
+
 
 #Aca ejecutamos el menu automaticamente
 if __name__ == "__main__":
