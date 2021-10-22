@@ -40,17 +40,22 @@ class Registro:
         return alumnos
 
 #Metodo para modificar los datos de un alumno
-    def modificar_alumno(self,dni, nuevodni, nombre, asistencia, tp, p1, p2, condicion, notafinal):
-        alumno = self._buscar_por_dni(dni)
+    def modificar_alumno(self,dni,nuevodni=False, nombre=False,asistencia=False, tp=False, p1=False, p2=False):
+        '''Busca la nota/tarea con el id dado y modifica el texto'''
+        alumno = self._buscar_por_id(dni)
         if alumno:
-            alumno.nuevodni = nuevodni
-            alumno.nombre = nombre
-            alumno.asistencia = asistencia
-            alumno.tp = tp
-            alumno.p1 = p1
-            alumno.p2 = p2
-            alumno.condicion = condicion
-            alumno.notafinal = notafinal
+            if nuevodni:
+                alumno.nuevodni = nuevodni
+            if nombre:
+                alumno.nombre = nombre
+            if asistencia:
+                alumno.asistencia = asistencia
+            if tp:
+                alumno.tp = tp
+            if p1:
+                alumno.p1 = p1
+            if p2:
+                alumno.p2 = p2
             self.repo.update(alumno)
             return True
         return False
