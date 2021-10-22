@@ -132,6 +132,16 @@ class Menu:
         self.nuevop2=Entry(self.marco5)
         self.nuevop2.grid(row=6,column=1)
 
+#Por ultimo realizaremos la interfaz para buscar a un alumno por su nombre o DNI
+        self.marco6 = LabelFrame(self.ventana, text='Buscar alumno por nombre o DNI (Distingue mayusculas)')
+        self.marco6.grid(row= 1, column=1, columnspan= 2)
+        self.marco6.grid_remove()
+        Label(self.marco6,text='DNI/Nombre').grid(row=4,column=0)
+        self.filtro= Entry(self.marco4)
+        self.filtro.grid(row=4,column=1)
+        botonbuscaralumno = ttk.Button(self.marco6,text='Buscar',command=lambda:[self.buscar_alumno(), self.limpiarmarcos(self.marco1)]).grid(row=6, column=1)
+
+
 #Aca ejecutamos el menu automaticamente
 if __name__ == "__main__":
     ventana= Tk()
