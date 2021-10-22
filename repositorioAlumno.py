@@ -27,10 +27,10 @@ class RepositorioAlumno(Repositorio):
 
 #Este metodo recibe un alumno y lo almacena en la base de datos. Primero actualiza su condicion. Y se guardan los cambios si todo salio exitosamente. De lo contrario retorna False
     def store(self, alumno):
-        if hasattr(alumno,'libre'):
+        if alumno.libre:
             alumno.cambiar_condicion_libre()
         else:
-            alumno.cambiar.condicion()
+            alumno.cambiar_condicion()
         try: 
             query = "INSERT INTO alumnos (dni, nombre, asistencia, tp, p1, p2, condicion, notafinal) VALUES (?, ?, ?, ?, ?, ?, ?, ?)"
             self.cursor.execute(query, [alumno.dni, alumno.nombre, alumno.asistencia, alumno.tp, alumno.p1, alumno.p2, alumno.condicion, alumno.notafinal])
@@ -59,14 +59,13 @@ class RepositorioAlumno(Repositorio):
 #Este meotodo recibe un alumno, actualiza su condicion y actualiza sus datos en la BD. Retorna True si la actualizacion no tuvo fallos. De lo contrario retorna False. Si el alumno no existe retorna False.
     
     def update(self, alumno):
-        if hasattr(alumno,'libre'):
+        if alumno.libre:
             alumno.cambiar_condicion_libre()
         else:
-            alumno.cambiar.condicion()
+            alumno.cambiar_condicion()
         try:
-            query = "UPDATE alumnos SET dni = ?, nombre = ?, asistencia = ?, tp = ?, p1 = ?, p2 = ?, condicion = ?, notafinal = ? WHERE dni = ?"
-            result = self.cursor.execute(query, [alumno.nuevodni, alumno.nombre, alumno.asistencia, alumno.tp, alumno.p1, alumno.p2, alumno.condicion, alumno.notafinal, alumno.dni])
-
+            query = "UPDATE alumnos SET dni = ?, nombre = ?, asistencia = ?, tp = ?, p1 = ?, p2 = ?, condicion = ?, notafinal = ?, libre = ? WHERE dni = ?"
+            result = self.cursor.execute(query, [alumno.nuevodni, alumno.nombre, alumno.asistencia, alumno.tp, alumno.p1, alumno.p2, alumno.condicion, alumno.notafinal, alumno.libre, alumno.dni])
             if result.rowcount == 0:
                 self.bd.rollback()
                 return False
