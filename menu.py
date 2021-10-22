@@ -87,6 +87,24 @@ class Menu:
         self.libre=Entry(self.marco2)
         self.libre.grid(row=6,column=1)
 
+#Aca produciremos la interfaz de eliminado de alumno con su boton para realizar la accion.
+        self.marco3 = LabelFrame(self.ventana, text='Eliminar alumno')
+        self.marco3.grid(row= 1, column=2, columnspan= 2)
+        self.marco3.grid_remove()
+        botoneliminar = ttk.Button(self.marco3,text='Eliminar',command=lambda:[self.eliminar()]).grid(row=6, column=1)
+        Label(self.marco3,text='DNI').grid(row=0,column=0)
+        self.dnidelete = Entry(self.marco3)
+        self.dnidelete.grid(row=0,column=1)
+
+#Aca produciremos la interfaz para buscar a un alumno por su condicion, ya sea aprobado, desaprobado, regular, incompleto
+        self.marco4 = LabelFrame(self.ventana,text='Buscar por condicion')
+        self.marco4.grid(row=1, column=2, columnspan=2)
+        self.marco4.grid_remove()
+        Label(self.marco4,text='Condicion').grid(row=0,column=0)
+        self.condicion = Entry(self.marco4)
+        self.condicion.grid(row=0,column=1)
+        botonbuscar = ttk.Button(self.marco4,text='Buscar',command=lambda:[self.buscar_condicion(), self.limpiarmarcos(self.marco1)]).grid(row=6, column=1)
+
 #Aca ejecutamos el menu automaticamente
 if __name__ == "__main__":
     ventana= Tk()
