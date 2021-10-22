@@ -17,7 +17,8 @@ class Menu:
         self.ventana = ventana
         self.ventana.title('Proyecto de registro')
         self.ventana.geometry('1280x720')
-        #Aca diseñamos el menú a base de botones, y cada uno tendrá el comando de mostrar su marco correspondiente
+
+#Aca diseñamos el menú a base de botones, y cada uno tendrá el comando de mostrar su marco correspondiente
         self.b1 = ttk.Button(self.ventana, text ="Mostrar registro",command=lambda:[self.limpiarmarcos(self.marco1),self.mostrar_registro()])
         self.b1.grid(row=0,column=0)
         self.b2 = ttk.Button(self.ventana, text ="Nuevo alumno",command=lambda:[self.limpiarmarcos(self.marco2)])
@@ -58,3 +59,36 @@ class Menu:
         self.tabla.heading('c6',text='Condicion')
         self.tabla.heading('c7',text='Nota Final')
         self.tabla.heading('c8',text='Libre')
+
+#Crearemos la interfaz que usaremos para agregar un alumno al registro. Ademas tendra un boton que asignara los cambios.    
+        self.marco2 = LabelFrame(self.ventana, text='Nuevo alumno')
+        self.marco2.grid(row= 0, column=8, columnspan= 2)
+        self.marco2.grid_remove()
+        botonagregar = ttk.Button(self.marco2,text='Agregar',command=self.agregar).grid(row=6, column=1)
+        Label(self.marco2,text='DNI').grid(row=0,column=0)
+        self.dni=Entry(self.marco2)
+        self.dni.grid(row=0,column=1)
+        Label(self.marco2,text='Nombre').grid(row=1,column=0)
+        self.nombre=Entry(self.marco2)
+        self.nombre.grid(row=1,column=1)
+        Label(self.marco2,text='Asistencia').grid(row=2,column=0)
+        self.asistencia=Entry(self.marco2)
+        self.asistencia.grid(row=2,column=1)
+        Label(self.marco2,text='Tps').grid(row=3,column=0)
+        self.tp= Entry(self.marco2)
+        self.tp.grid(row=3,column=1)
+        Label(self.marco2,text='Parcial 1').grid(row=4,column=0)
+        self.p1=Entry(self.marco2)
+        self.p1.grid(row=4,column=1)
+        Label(self.marco2,text='Parcial 2').grid(row=4,column=0)
+        self.p2=Entry(self.marco2)
+        self.p2.grid(row=5,column=1)
+        Label(self.marco2,text='Libre').grid(row=5,column=0)
+        self.libre=Entry(self.marco2)
+        self.libre.grid(row=6,column=1)
+
+#Aca ejecutamos el menu automaticamente
+if __name__ == "__main__":
+    ventana= Tk()
+    aplicacion=Menu(ventana)
+    ventana.mainloop()
