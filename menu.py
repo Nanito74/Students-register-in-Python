@@ -212,6 +212,20 @@ class Menu:
         else:
             mb.showerror('Error','Debes cargar estos campos!')
 
+#Este metodo obtendra los datos del entry de la interfaz y modificara los datos. Si se modifica con exito retorna un mensaje.
+    def modificar(self):
+        dni = int(self.dniviejo.get())
+        nuevodni = int(self.nuevodni.get())
+        nombre = self.nuevonombre.get()
+        asistencia = self.nuevaasistencia.get()
+        tp = self.nuevotp.get()
+        p1 = self.nuevop1.get()
+        p2 = self.nuevop2.get()
+        if self.registro.modificar_alumno(dni,nuevodni,nombre,asistencia,tp,p1,p2):
+            mb.showinfo('Exito','Alumno modificado con exitosamente')
+        else:
+            mb.showerror('Error',('Ha ocurrido un error, asegurate de que el alumno exista'))
+
 
 #Aca ejecutamos el menu automaticamente
 if __name__ == "__main__":
