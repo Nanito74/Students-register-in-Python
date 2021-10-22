@@ -105,6 +105,33 @@ class Menu:
         self.condicion.grid(row=0,column=1)
         botonbuscar = ttk.Button(self.marco4,text='Buscar',command=lambda:[self.buscar_condicion(), self.limpiarmarcos(self.marco1)]).grid(row=6, column=1)
 
+#Realizamos la interfaz para modificar un alumno.
+        self.marco5 = LabelFrame(self.ventana, text='Modificar alumno')
+        self.marco5.grid(row= 0, column=8, columnspan= 2)
+        self.marco5.grid_remove()
+        botonmodificar = ttk.Button(self.marco5,text='Modificar',command=lambda:[self.modificar()]).grid(row=6, column=1)
+        Label(self.marco5,text='Dni').grid(row=0,column=0)
+        self.dniviejo=Entry(self.marco5)
+        self.dniviejo.grid(row=0,column=1)
+        Label(self.marco5,text='Nuevo Dni').grid(row=1,column=0)
+        self.nuevodni=Entry(self.marco5)
+        self.nuevodni.grid(row=1,column=1)
+        Label(self.marco5,text='Nombre').grid(row=2,column=0)
+        self.nuevonombre=Entry(self.marco5)
+        self.nuevonombre.grid(row=2,column=1)
+        Label(self.marco5,text='Asistencia').grid(row=3,column=0)
+        self.nuevaasistencia=Entry(self.marco5)
+        self.nuevaasistencia.grid(row=3,column=1)
+        Label(self.marco5,text='Tps').grid(row=4,column=0)
+        self.nuevotp= Entry(self.marco5)
+        self.nuevotp.grid(row=4,column=1)
+        Label(self.marco5,text='Parcial 1').grid(row=5,column=0)
+        self.nuevop1=Entry(self.marco5)
+        self.nuevop1.grid(row=5,column=1)
+        Label(self.marco5,text='Parcial 2').grid(row=6,column=0)
+        self.nuevop2=Entry(self.marco5)
+        self.nuevop2.grid(row=6,column=1)
+
 #Aca ejecutamos el menu automaticamente
 if __name__ == "__main__":
     ventana= Tk()
