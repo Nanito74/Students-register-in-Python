@@ -42,7 +42,7 @@ class Registro:
 #Metodo para modificar los datos de un alumno
     def modificar_alumno(self,dni,nuevodni=False, nombre=False,asistencia=False, tp=False, p1=False, p2=False):
         '''Busca la nota/tarea con el id dado y modifica el texto'''
-        alumno = self._buscar_por_id(dni)
+        alumno = self._buscar_por_dni(dni)
         if alumno:
             if nuevodni:
                 alumno.nuevodni = nuevodni

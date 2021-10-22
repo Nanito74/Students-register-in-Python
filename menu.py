@@ -25,11 +25,11 @@ class Menu:
         self.b2.grid(row=0,column=1)
         self.b3 = ttk.Button(self.ventana, text ="Eliminar alumno",command=lambda:[self.limpiarmarcos(self.marco3)])
         self.b3.grid(row=0,column=2)
-        self.b4=ttk.Button(self.ventana, text ="Modificar alumno",command=lambda:[self.limpiarmarcos(self.marco4)])
+        self.b4=ttk.Button(self.ventana, text ="Buscar por condicion",command=lambda:[self.limpiarmarcos(self.marco4)])
         self.b4.grid(row=0,column=3)
-        self.b5=ttk.Button(self.ventana, text ="Buscar alumno",command=lambda:[self.limpiarmarcos(self.marco5)])
+        self.b5=ttk.Button(self.ventana, text ="Modificar alumno",command=lambda:[self.limpiarmarcos(self.marco5)])
         self.b5.grid(row=0,column=4)
-        self.b6 = ttk.Button(self.ventana, text ="Buscar por condicion",command=lambda:[self.limpiarmarcos(self.marco6)])
+        self.b6 = ttk.Button(self.ventana, text ="Buscar alumno",command=lambda:[self.limpiarmarcos(self.marco6)])
         self.b6.grid(row=0,column=5)
         self.b7 = ttk.Button(self.ventana, text ="Salir",command=self.salir).grid(row=0,column=6)
 
@@ -62,7 +62,7 @@ class Menu:
 
 #Crearemos la interfaz que usaremos para agregar un alumno al registro. Ademas tendra un boton que asignara los cambios.    
         self.marco2 = LabelFrame(self.ventana, text='Nuevo alumno')
-        self.marco2.grid(row= 0, column=8, columnspan= 2)
+        self.marco2.grid(row= 2, column=9, columnspan= 2)
         self.marco2.grid_remove()
         botonagregar = ttk.Button(self.marco2,text='Agregar',command=self.agregar).grid(row=7, column=1)
         Label(self.marco2,text='DNI').grid(row=0,column=0)
@@ -89,25 +89,25 @@ class Menu:
 
 #Aca produciremos la interfaz de eliminado de alumno con su boton para realizar la accion.
         self.marco3 = LabelFrame(self.ventana, text='Eliminar alumno')
-        self.marco3.grid(row= 1, column=2, columnspan= 2)
+        self.marco3.grid(row= 1, column=8)
         self.marco3.grid_remove()
         botoneliminar = ttk.Button(self.marco3,text='Eliminar',command=lambda:[self.eliminar()]).grid(row=6, column=1)
-        Label(self.marco3,text='DNI').grid(row=0,column=0)
+        Label(self.marco3,text='DNI').grid(row=0,column=8)
         self.dnidelete = Entry(self.marco3)
         self.dnidelete.grid(row=0,column=1)
 
 #Aca produciremos la interfaz para buscar a un alumno por su condicion, ya sea aprobado, desaprobado, regular, incompleto
         self.marco4 = LabelFrame(self.ventana,text='Buscar por condicion')
-        self.marco4.grid(row=1, column=2, columnspan=2)
+        self.marco4.grid(row=1, column=8)
         self.marco4.grid_remove()
-        Label(self.marco4,text='Condicion').grid(row=0,column=0)
+        Label(self.marco4,text='Condicion').grid(row=0,column=8)
         self.condicion = Entry(self.marco4)
         self.condicion.grid(row=0,column=1)
         botonbuscar = ttk.Button(self.marco4,text='Buscar',command=lambda:[self.buscar_condicion(), self.limpiarmarcos(self.marco1)]).grid(row=6, column=1)
 
 #Realizamos la interfaz para modificar un alumno.
         self.marco5 = LabelFrame(self.ventana, text='Modificar alumno')
-        self.marco5.grid(row= 0, column=8, columnspan= 2)
+        self.marco5.grid(row= 2, column=9, columnspan= 2)
         self.marco5.grid_remove()
         botonmodificar = ttk.Button(self.marco5,text='Modificar',command=lambda:[self.modificar()]).grid(row=7, column=1)
         Label(self.marco5,text='Dni').grid(row=0,column=0)
@@ -134,10 +134,10 @@ class Menu:
 
 #Por ultimo realizaremos la interfaz para buscar a un alumno por su nombre o DNI
         self.marco6 = LabelFrame(self.ventana, text='Buscar alumno por nombre o DNI (Distingue mayusculas)')
-        self.marco6.grid(row= 1, column=1, columnspan= 2)
+        self.marco6.grid(row= 2, column=8)
         self.marco6.grid_remove()
         Label(self.marco6,text='DNI/Nombre').grid(row=4,column=0)
-        self.filtro= Entry(self.marco4)
+        self.filtro = Entry(self.marco6)
         self.filtro.grid(row=4,column=1)
         botonbuscaralumno = ttk.Button(self.marco6,text='Buscar',command=lambda:[self.buscar_alumno(), self.limpiarmarcos(self.marco1)]).grid(row=6, column=1)
 
@@ -187,7 +187,7 @@ class Menu:
     def agregar(self):
         dni = self.dni.get()
         nombre = self.nombre.get()
-        if len(dni) != 0 or len(nombre) != 0:
+        if len(dni) != 0 and len(nombre) != 0:
             asistencia = self.asistencia.get()
             if asistencia == '':
                 asistencia = None
@@ -202,9 +202,8 @@ class Menu:
                 p2 = None
             libre = self.libre.get()
             if libre == 'si':
-                alumnos = self.registro.nuevo_alumno_libre(dni,nombre,asistencia,tp,p1,p2)
-                self.nombre.delete(0,END)
-                self.nombre.dni(0,END)
+                alumnos = self.registro.nuevo_alumno_libre(dni,nombre,asistencia,tp,p1,p2,libre)
+                self.limpiarcampos
                 mb.showinfo('Exito','Alumno cargado exitosamente')                
             else: 
                 alumnos = self.registro.nuevo_alumno(dni,nombre,asistencia,tp,p1,p2)
@@ -212,11 +211,12 @@ class Menu:
                 mb.showinfo('Exito','Alumno cargado exitosamente')
         else:
             mb.showerror('Error','Debes cargar estos campos!')
+            self.limpiarcampos()
 
 #Este metodo obtendra los datos del entry de la interfaz y modificara los datos. Si se modifica con exito retorna un mensaje.
     def modificar(self):
         dni = int(self.dniviejo.get())
-        nuevodni = int(self.nuevodni.get())
+        nuevodni = self.nuevodni.get()
         nombre = self.nuevonombre.get()
         asistencia = self.nuevaasistencia.get()
         tp = self.nuevotp.get()
@@ -224,8 +224,19 @@ class Menu:
         p2 = self.nuevop2.get()
         if self.registro.modificar_alumno(dni,nuevodni,nombre,asistencia,tp,p1,p2):
             mb.showinfo('Exito','Alumno modificado con exitosamente')
+            self.limpiarcampos()
         else:
             mb.showerror('Error',('Ha ocurrido un error, asegurate de que el alumno exista'))
+            self.limpiarcampos()
+#Metodo eliminar alumno. Recibe un dni y elimina al alumno del registro.
+    def eliminar(self):
+        dni = int(self.dnidelete.get())
+        if self.registro.eliminar_alumno(dni):
+            self.limpiarcampos()
+            mb.showinfo('Exito','Alumno eliminado exitosamente')
+        else:
+            mb.showerror('Error','Alumno no encontrado')
+            self.limpiarcampos()
 
 #Este metodo busca alumno por filtro DNI O Nombre y retorna una lista con las coincidencias. Si no muestra error.
     def buscar_alumno(self):
@@ -233,8 +244,10 @@ class Menu:
         alumnos = self.registro.buscar(filtro)
         if alumnos:
             self.mostrar_registro(alumnos)
+            self.limpiarcampos()
         else:
             mb.showerror('Error','Ningun alumno coincide con el filtro')
+            self.limpiarcampos()
 
 #Este metodo busca alumno por condicion y retorna una lista con las coincidencia. Si no muestra error.
     def buscar_condicion(self):
@@ -242,8 +255,10 @@ class Menu:
         alumnos = self.registro.mostrar_condicion(condicion)
         if alumnos:
             self.mostrar_registro(alumnos)
+            self.limpiarcampos()
         else:
             mb.showerror('Error','Ningun alumno coincide con la condicion')
+            self.limpiarcampos()
 
 #Salir del sistema
     def salir(self):
