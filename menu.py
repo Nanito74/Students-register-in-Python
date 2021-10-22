@@ -64,7 +64,7 @@ class Menu:
         self.marco2 = LabelFrame(self.ventana, text='Nuevo alumno')
         self.marco2.grid(row= 0, column=8, columnspan= 2)
         self.marco2.grid_remove()
-        botonagregar = ttk.Button(self.marco2,text='Agregar',command=self.agregar).grid(row=6, column=1)
+        botonagregar = ttk.Button(self.marco2,text='Agregar',command=self.agregar).grid(row=7, column=1)
         Label(self.marco2,text='DNI').grid(row=0,column=0)
         self.dni=Entry(self.marco2)
         self.dni.grid(row=0,column=1)
@@ -80,10 +80,10 @@ class Menu:
         Label(self.marco2,text='Parcial 1').grid(row=4,column=0)
         self.p1=Entry(self.marco2)
         self.p1.grid(row=4,column=1)
-        Label(self.marco2,text='Parcial 2').grid(row=4,column=0)
+        Label(self.marco2,text='Parcial 2').grid(row=5,column=0)
         self.p2=Entry(self.marco2)
         self.p2.grid(row=5,column=1)
-        Label(self.marco2,text='Libre').grid(row=5,column=0)
+        Label(self.marco2,text='Libre').grid(row=6,column=0)
         self.libre=Entry(self.marco2)
         self.libre.grid(row=6,column=1)
 
@@ -109,7 +109,7 @@ class Menu:
         self.marco5 = LabelFrame(self.ventana, text='Modificar alumno')
         self.marco5.grid(row= 0, column=8, columnspan= 2)
         self.marco5.grid_remove()
-        botonmodificar = ttk.Button(self.marco5,text='Modificar',command=lambda:[self.modificar()]).grid(row=6, column=1)
+        botonmodificar = ttk.Button(self.marco5,text='Modificar',command=lambda:[self.modificar()]).grid(row=7, column=1)
         Label(self.marco5,text='Dni').grid(row=0,column=0)
         self.dniviejo=Entry(self.marco5)
         self.dniviejo.grid(row=0,column=1)
@@ -156,6 +156,7 @@ class Menu:
     def limpiarcampos(self):
         self.nombre.delete(0,END)
         self.dni.delete(0,END)
+        self.asistencia.delete(0,END)
         self.tp.delete(0,END)
         self.p1.delete(0,END)
         self.p2.delete(0,END)
@@ -225,6 +226,28 @@ class Menu:
             mb.showinfo('Exito','Alumno modificado con exitosamente')
         else:
             mb.showerror('Error',('Ha ocurrido un error, asegurate de que el alumno exista'))
+
+#Este metodo busca alumno por filtro DNI O Nombre y retorna una lista con las coincidencias. Si no muestra error.
+    def buscar_alumno(self):
+        filtro = self.filtro.get()
+        alumnos = self.registro.buscar(filtro)
+        if alumnos:
+            self.mostrar_registro(alumnos)
+        else:
+            mb.showerror('Error','Ningun alumno coincide con el filtro')
+
+#Este metodo busca alumno por condicion y retorna una lista con las coincidencia. Si no muestra error.
+    def buscar_condicion(self):
+        condicion = self.condicion.get()
+        alumnos = self.registro.mostrar_condicion(condicion)
+        if alumnos:
+            self.mostrar_registro(alumnos)
+        else:
+            mb.showerror('Error','Ningun alumno coincide con la condicion')
+
+#Salir del sistema
+    def salir(self):
+        sys.exit(0)
 
 
 #Aca ejecutamos el menu automaticamente
