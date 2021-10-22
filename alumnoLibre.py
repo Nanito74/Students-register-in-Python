@@ -11,6 +11,6 @@ class AlumnoLibre(Alumno):
         else:
             self.condicion = 'Desaprobado'
         if self.condicion == 'Aprobado':
-            self.notafinal = (self.p1 + self.p2) / 2
+            self.notafinal = (float(self.p1) + float(self.p2)) / 2
         else:
             self.notafinal = None
