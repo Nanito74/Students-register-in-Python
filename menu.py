@@ -172,6 +172,47 @@ class Menu:
         self.filtro.delete(0,END)
 
 
+#Metodo de mostrar registro. Muestra un registro condicionado si lo obtiene y si no muestra el registro total. Inserta los datos en la  tabla
+    def mostrar_registro(self, alumnos=None):
+            self.tabla.delete(*self.tabla.get_children())
+            if alumnos:
+                for alumno  in alumnos:
+                    self.tabla.insert("",END,text=alumno.dni,values=(alumno.nombre, alumno.asistencia, alumno.tp, alumno.p1, alumno.p2, alumno.condicion, alumno.notafinal, alumno.libre))
+            else:
+                for alumno in self.registro.alumnos:
+                    self.tabla.insert("",END,text=alumno.dni,values=(alumno.nombre, alumno.asistencia, alumno.tp, alumno.p1, alumno.p2, alumno.condicion, alumno.notafinal, alumno.libre))
+
+#Metodo para agregar alumno. Recibe los entrys de la interfaz y almacena los datos. Si es libre almacena alumno libre. Si dni o nombre no estan completados muestra error
+    def agregar(self):
+        dni = self.dni.get()
+        nombre = self.nombre.get()
+        if len(dni) != 0 or len(nombre) != 0:
+            asistencia = self.asistencia.get()
+            if asistencia == '':
+                asistencia = None
+            tp = self.tp.get()
+            if tp == '':
+                tp = None
+            p1 = self.p1.get()
+            if p1 == '':
+                p1 = None
+            p2 = self.p2.get()
+            if p2 == '':
+                p2 = None
+            libre = self.libre.get()
+            if libre == 'si':
+                alumnos = self.registro.nuevo_alumno_libre(dni,nombre,asistencia,tp,p1,p2)
+                self.nombre.delete(0,END)
+                self.nombre.dni(0,END)
+                mb.showinfo('Exito','Alumno cargado exitosamente')                
+            else: 
+                alumnos = self.registro.nuevo_alumno(dni,nombre,asistencia,tp,p1,p2)
+                self.limpiarcampos()                
+                mb.showinfo('Exito','Alumno cargado exitosamente')
+        else:
+            mb.showerror('Error','Debes cargar estos campos!')
+
+
 #Aca ejecutamos el menu automaticamente
 if __name__ == "__main__":
     ventana= Tk()
