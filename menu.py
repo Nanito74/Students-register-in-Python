@@ -83,7 +83,7 @@ class Menu:
         Label(self.marco2,text='Parcial 2').grid(row=5,column=0)
         self.p2=Entry(self.marco2)
         self.p2.grid(row=5,column=1)
-        Label(self.marco2,text='Libre').grid(row=6,column=0)
+        Label(self.marco2,text='Libre (Escriba "si" en miniscula por favor').grid(row=6,column=0)
         self.libre=Entry(self.marco2)
         self.libre.grid(row=6,column=1)
 
